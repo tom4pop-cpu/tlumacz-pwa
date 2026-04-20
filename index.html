@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Tłumacz">
+  <meta name="theme-color" content="#0a0a0a">
+  <title>Tłumacz</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="icon" type="image/png" href="icon-192.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <header>
+      <div class="lang-switcher">
+        <button class="lang-btn" data-src="pl" data-tgt="en">🇵🇱 → 🇬🇧</button>
+        <button class="lang-btn" data-src="en" data-tgt="pl">🇬🇧 → 🇵🇱</button>
+        <button class="lang-btn" data-src="pl" data-tgt="es">🇵🇱 → 🇪🇸</button>
+        <button class="lang-btn" data-src="es" data-tgt="pl">🇪🇸 → 🇵🇱</button>
+      </div>
+      <button id="settings-btn" aria-label="Ustawienia">⚙️</button>
+    </header>
+
+    <div class="context-row">
+      <label for="context">Kontekst:</label>
+      <select id="context">
+        <option value="auto">Auto</option>
+        <option value="casual">Potoczny</option>
+        <option value="formal">Formalny</option>
+        <option value="legal">Prawniczy / RODO</option>
+        <option value="business">Biznesowy</option>
+      </select>
+    </div>
+
+    <main>
+      <section class="panel source">
+        <div class="panel-header">
+          <span id="src-label">Polski</span>
+          <button id="clear-btn" aria-label="Wyczyść">✕</button>
+        </div>
+        <textarea id="src-text" placeholder="Mów lub pisz..." rows="4"></textarea>
+      </section>
+
+      <section class="panel target">
+        <div class="panel-header">
+          <span id="tgt-label">Angielski</span>
+          <div class="panel-actions">
+            <button id="play-btn" aria-label="Odtwórz" disabled>🔊</button>
+            <button id="copy-btn" aria-label="Kopiuj" disabled>📋</button>
+          </div>
+        </div>
+        <div id="tgt-text" class="output"></div>
+        <div id="status" class="status"></div>
+      </section>
+    </main>
+
+    <div class="mic-container">
+      <button id="mic-btn" aria-label="Nagrywaj">
+        <svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor">
+          <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
+          <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
+        </svg>
+      </button>
+      <button id="translate-btn" class="secondary">Przetłumacz tekst</button>
+    </div>
+
+    <section id="history-section" class="history">
+      <h3>Historia</h3>
+      <ul id="history-list"></ul>
+    </section>
+  </div>
+
+  <div id="settings-modal" class="modal hidden">
+    <div class="modal-content">
+      <h2>Ustawienia</h2>
+      <label for="api-key">Klucz OpenAI API:</label>
+      <input type="password" id="api-key" placeholder="sk-proj-...">
+      <p class="hint">Klucz zapisany tylko w tej przeglądarce (localStorage). Nie wysyłamy go nigdzie poza OpenAI API.</p>
+
+      <label for="voice">Głos TTS:</label>
+      <select id="voice">
+        <option value="nova">Nova (kobiecy, naturalny)</option>
+        <option value="alloy">Alloy (neutralny)</option>
+        <option value="echo">Echo (męski)</option>
+        <option value="shimmer">Shimmer (kobiecy, ciepły)</option>
+        <option value="onyx">Onyx (męski, głęboki)</option>
+        <option value="fable">Fable (brytyjski)</option>
+      </select>
+
+      <div class="modal-actions">
+        <button id="save-settings">Zapisz</button>
+        <button id="close-settings" class="secondary">Anuluj</button>
+      </div>
+      <button id="clear-history" class="danger">Wyczyść historię</button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

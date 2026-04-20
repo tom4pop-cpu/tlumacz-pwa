@@ -78,6 +78,10 @@ header h1 {
   min-height: 0;
 }
 
+.panel[data-panel="A"] {
+  transform: rotate(180deg);
+}
+
 .panel-top {
   display: flex;
   justify-content: space-between;

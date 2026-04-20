@@ -16,61 +16,66 @@
 <body>
   <div class="app">
     <header>
-      <div class="lang-switcher">
-        <button class="lang-btn" data-src="pl" data-tgt="en">🇵🇱 → 🇬🇧</button>
-        <button class="lang-btn" data-src="en" data-tgt="pl">🇬🇧 → 🇵🇱</button>
-        <button class="lang-btn" data-src="pl" data-tgt="es">🇵🇱 → 🇪🇸</button>
-        <button class="lang-btn" data-src="es" data-tgt="pl">🇪🇸 → 🇵🇱</button>
-      </div>
+      <h1>Tłumacz</h1>
       <button id="settings-btn" aria-label="Ustawienia">⚙️</button>
     </header>
 
-    <div class="context-row">
-      <label for="context">Kontekst:</label>
-      <select id="context">
-        <option value="auto">Auto</option>
-        <option value="casual">Potoczny</option>
-        <option value="formal">Formalny</option>
-        <option value="legal">Prawniczy / RODO</option>
-        <option value="business">Biznesowy</option>
-      </select>
+    <section class="panel" data-panel="A">
+      <div class="panel-top">
+        <select class="lang-select" data-panel="A">
+          <option value="pl">🇵🇱 Polski</option>
+          <option value="en">🇬🇧 Angielski</option>
+          <option value="es">🇪🇸 Hiszpański</option>
+        </select>
+        <div class="panel-actions">
+          <button class="play-btn" data-panel="A" aria-label="Odtwórz" disabled>🔊</button>
+          <button class="copy-btn" data-panel="A" aria-label="Kopiuj" disabled>📋</button>
+          <button class="clear-btn" data-panel="A" aria-label="Wyczyść">✕</button>
+        </div>
+      </div>
+      <textarea class="panel-text" data-panel="A" placeholder="Mów lub pisz tutaj..." rows="4"></textarea>
+      <div class="panel-bottom">
+        <button class="mic-btn" data-panel="A" aria-label="Nagrywaj">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+            <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
+            <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
+          </svg>
+          <span>Przytrzymaj i mów</span>
+        </button>
+        <button class="send-btn" data-panel="A">Tłumacz ↓</button>
+      </div>
+      <div class="status" data-panel="A"></div>
+    </section>
+
+    <div class="divider">
+      <button id="swap-btn" aria-label="Zamień języki">⇅</button>
     </div>
 
-    <main>
-      <section class="panel source">
-        <div class="panel-header">
-          <span id="src-label">Polski</span>
-          <button id="clear-btn" aria-label="Wyczyść">✕</button>
+    <section class="panel" data-panel="B">
+      <div class="panel-top">
+        <select class="lang-select" data-panel="B">
+          <option value="pl">🇵🇱 Polski</option>
+          <option value="en" selected>🇬🇧 Angielski</option>
+          <option value="es">🇪🇸 Hiszpański</option>
+        </select>
+        <div class="panel-actions">
+          <button class="play-btn" data-panel="B" aria-label="Odtwórz" disabled>🔊</button>
+          <button class="copy-btn" data-panel="B" aria-label="Kopiuj" disabled>📋</button>
+          <button class="clear-btn" data-panel="B" aria-label="Wyczyść">✕</button>
         </div>
-        <textarea id="src-text" placeholder="Mów lub pisz..." rows="4"></textarea>
-      </section>
-
-      <section class="panel target">
-        <div class="panel-header">
-          <span id="tgt-label">Angielski</span>
-          <div class="panel-actions">
-            <button id="play-btn" aria-label="Odtwórz" disabled>🔊</button>
-            <button id="copy-btn" aria-label="Kopiuj" disabled>📋</button>
-          </div>
-        </div>
-        <div id="tgt-text" class="output"></div>
-        <div id="status" class="status"></div>
-      </section>
-    </main>
-
-    <div class="mic-container">
-      <button id="mic-btn" aria-label="Nagrywaj">
-        <svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor">
-          <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
-          <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
-        </svg>
-      </button>
-      <button id="translate-btn" class="secondary">Przetłumacz tekst</button>
-    </div>
-
-    <section id="history-section" class="history">
-      <h3>Historia</h3>
-      <ul id="history-list"></ul>
+      </div>
+      <textarea class="panel-text" data-panel="B" placeholder="Mów lub pisz tutaj..." rows="4"></textarea>
+      <div class="panel-bottom">
+        <button class="mic-btn" data-panel="B" aria-label="Nagrywaj">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+            <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
+            <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
+          </svg>
+          <span>Przytrzymaj i mów</span>
+        </button>
+        <button class="send-btn" data-panel="B">Tłumacz ↑</button>
+      </div>
+      <div class="status" data-panel="B"></div>
     </section>
   </div>
 
@@ -79,7 +84,7 @@
       <h2>Ustawienia</h2>
       <label for="api-key">Klucz OpenAI API:</label>
       <input type="password" id="api-key" placeholder="sk-proj-...">
-      <p class="hint">Klucz zapisany tylko w tej przeglądarce (localStorage). Nie wysyłamy go nigdzie poza OpenAI API.</p>
+      <p class="hint">Klucz zapisany tylko w tej przeglądarce (localStorage). Nie opuszcza Twojego telefonu — idzie tylko bezpośrednio do OpenAI API.</p>
 
       <label for="voice">Głos TTS:</label>
       <select id="voice">
@@ -91,11 +96,14 @@
         <option value="fable">Fable (brytyjski)</option>
       </select>
 
+      <label>
+        <input type="checkbox" id="autoplay"> Automatycznie odtwarzaj tłumaczenie
+      </label>
+
       <div class="modal-actions">
         <button id="save-settings">Zapisz</button>
         <button id="close-settings" class="secondary">Anuluj</button>
       </div>
-      <button id="clear-history" class="danger">Wyczyść historię</button>
     </div>
   </div>
 

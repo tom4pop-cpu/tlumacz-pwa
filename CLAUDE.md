@@ -8,13 +8,16 @@ Progressive Web App (PWA) na iPhone'a do szybkiego, jakościowego tłumaczenia P
 - Działa jak aplikacja po dodaniu do ekranu głównego (Safari → Udostępnij → Do ekranu głównego)
 
 ## Stan
-Utworzony 2026-04-19. Plik CLAUDE.md + będą: index.html, style.css, app.js, manifest.json, sw.js, ikony, README.
+Utworzony i wdrożony 2026-04-19. Działa na: **https://tom4pop-cpu.github.io/tlumacz-pwa/**
+
+Repo: https://github.com/tom4pop-cpu/tlumacz-pwa
+
+Pliki: index.html, style.css, app.js, manifest.json, sw.js, icon-192.png, icon-512.png, README.md
 
 ## Następne kroki
-1. Zbudować pliki PWA (HTML/CSS/JS/manifest/service worker)
-2. Wygenerować ikony
-3. Wypchnąć na GitHub Pages (konto tom4pop-cpu)
-4. Dostarczyć URL + instrukcję wklejenia klucza API w przeglądarce
+- User odświeża klucz OpenAI (ten ze starego czatu trzeba unieważnić), wkleja w ⚙️ Ustawienia w apce
+- User dodaje apkę do ekranu głównego iPhone'a (Safari → Udostępnij → Do ekranu głównego)
+- Ewentualne poprawki po testach: dodatkowe języki, lepsze prompty, ikony, Shortcut-trigger z Siri
 
 ## Notatki
 - Klucz OpenAI **nigdy** nie trafia do kodu ani na GitHuba — tylko do localStorage przeglądarki po stronie klienta

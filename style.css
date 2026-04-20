@@ -35,10 +35,10 @@ body {
 .app {
   max-width: 600px;
   margin: 0 auto;
-  padding: 16px;
+  padding: 12px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 8px;
   min-height: 100vh;
 }
 
@@ -46,30 +46,13 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 8px;
+  padding: 4px 4px 8px;
 }
 
-.lang-switcher {
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-  flex: 1;
-}
-
-.lang-btn {
-  background: var(--bg-panel);
-  color: var(--text);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 8px 10px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: all 0.15s;
-}
-
-.lang-btn.active {
-  background: var(--accent);
-  border-color: var(--accent);
+header h1 {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
 }
 
 #settings-btn {
@@ -77,48 +60,10 @@ header {
   border: 1px solid var(--border);
   color: var(--text);
   border-radius: 10px;
-  width: 44px;
-  height: 44px;
-  font-size: 18px;
+  width: 40px;
+  height: 40px;
+  font-size: 16px;
   cursor: pointer;
-  flex-shrink: 0;
-}
-
-.context-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: var(--bg-panel);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 10px 12px;
-}
-
-.context-row label {
-  font-size: 14px;
-  color: var(--text-dim);
-}
-
-#context, #voice {
-  flex: 1;
-  background: transparent;
-  color: var(--text);
-  border: none;
-  font-size: 15px;
-  outline: none;
-  -webkit-appearance: none;
-  appearance: none;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'><path fill='%23a0a0a0' d='M6 9L1 4h10z'/></svg>");
-  background-repeat: no-repeat;
-  background-position: right center;
-  padding-right: 20px;
-}
-
-main {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  flex: 1;
 }
 
 .panel {
@@ -126,20 +71,37 @@ main {
   border: 1px solid var(--border);
   border-radius: 14px;
   padding: 12px;
-  min-height: 140px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
+  flex: 1;
+  min-height: 0;
 }
 
-.panel-header {
+.panel-top {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 13px;
-  color: var(--text-dim);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  gap: 8px;
+}
+
+.lang-select {
+  background: var(--bg-elevated);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 8px 28px 8px 12px;
+  font-size: 15px;
+  font-weight: 500;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'><path fill='%23a0a0a0' d='M6 9L1 4h10z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  cursor: pointer;
+  flex: 1;
+  max-width: 180px;
 }
 
 .panel-actions {
@@ -147,7 +109,7 @@ main {
   gap: 6px;
 }
 
-.panel-actions button, #clear-btn {
+.panel-actions button {
   background: var(--bg-elevated);
   border: none;
   color: var(--text);
@@ -155,48 +117,94 @@ main {
   width: 36px;
   height: 36px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 15px;
 }
 
 .panel-actions button:disabled {
-  opacity: 0.4;
+  opacity: 0.35;
   cursor: not-allowed;
 }
 
-#src-text {
+.panel-text {
   background: transparent;
   color: var(--text);
   border: none;
   resize: none;
-  font-size: 18px;
+  font-size: 17px;
+  line-height: 1.4;
   outline: none;
   font-family: inherit;
   flex: 1;
-  min-height: 80px;
+  min-height: 70px;
+  padding: 4px 2px;
 }
 
-#src-text::placeholder {
+.panel-text::placeholder {
   color: var(--text-dim);
 }
 
-.output {
-  font-size: 18px;
-  line-height: 1.4;
+.panel-bottom {
+  display: flex;
+  gap: 8px;
+  align-items: stretch;
+}
+
+.mic-btn {
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: inherit;
+  flex: 2;
+  justify-content: center;
+  transition: background 0.15s, transform 0.1s;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.mic-btn:active, .mic-btn.recording {
+  background: var(--danger);
+  transform: scale(0.98);
+}
+
+.mic-btn.recording {
+  animation: pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 #ff453a66; }
+  50% { box-shadow: 0 0 0 8px #ff453a00; }
+}
+
+.send-btn {
+  background: var(--bg-elevated);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: inherit;
   flex: 1;
-  min-height: 80px;
-  white-space: pre-wrap;
-  word-break: break-word;
 }
 
-.output:empty::before {
-  content: "Tłumaczenie pojawi się tutaj...";
-  color: var(--text-dim);
+.send-btn:active {
+  background: var(--border);
 }
 
 .status {
-  font-size: 13px;
+  font-size: 12px;
   color: var(--text-dim);
-  min-height: 18px;
+  min-height: 16px;
+  padding: 0 2px;
 }
 
 .status.error {
@@ -207,110 +215,35 @@ main {
   color: var(--success);
 }
 
-.mic-container {
+.divider {
   display: flex;
-  gap: 10px;
-  align-items: center;
   justify-content: center;
-  padding: 10px 0;
+  align-items: center;
+  padding: 2px 0;
 }
 
-#mic-btn {
-  background: var(--accent);
-  color: white;
-  border: none;
+#swap-btn {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  color: var(--text);
   border-radius: 50%;
-  width: 72px;
-  height: 72px;
+  width: 40px;
+  height: 40px;
+  font-size: 18px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 16px var(--accent-dim);
-  transition: transform 0.1s, background 0.15s;
 }
 
-#mic-btn:active, #mic-btn.recording {
-  transform: scale(0.95);
-  background: var(--danger);
-  box-shadow: 0 4px 24px #ff453a66;
-  animation: pulse 1.2s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { box-shadow: 0 4px 16px #ff453a66; }
-  50% { box-shadow: 0 4px 30px #ff453acc; }
-}
-
-.secondary {
-  background: var(--bg-elevated);
-  color: var(--text);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 12px 16px;
-  font-size: 15px;
-  cursor: pointer;
-}
-
-.danger {
-  background: transparent;
-  color: var(--danger);
-  border: 1px solid var(--danger);
-  border-radius: 10px;
-  padding: 10px 14px;
-  font-size: 14px;
-  cursor: pointer;
-  margin-top: 12px;
-  width: 100%;
-}
-
-.history {
-  margin-top: 8px;
-}
-
-.history h3 {
-  font-size: 13px;
-  color: var(--text-dim);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-bottom: 8px;
-}
-
-#history-list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-#history-list li {
-  background: var(--bg-panel);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 10px 12px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: background 0.15s;
-}
-
-#history-list li:active {
-  background: var(--bg-elevated);
-}
-
-.history-src {
-  color: var(--text-dim);
-  font-size: 13px;
-  margin-bottom: 4px;
-}
-
-.history-tgt {
-  color: var(--text);
+#swap-btn:active {
+  background: var(--border);
 }
 
 .modal {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.75);
   z-index: 100;
   display: flex;
   align-items: center;
@@ -343,9 +276,12 @@ main {
   font-size: 13px;
   color: var(--text-dim);
   margin-top: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
-.modal-content input {
+.modal-content input[type="password"], .modal-content select {
   background: var(--bg-elevated);
   border: 1px solid var(--border);
   color: var(--text);
@@ -354,6 +290,15 @@ main {
   font-size: 15px;
   outline: none;
   font-family: inherit;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.modal-content select {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'><path fill='%23a0a0a0' d='M6 9L1 4h10z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 28px;
 }
 
 .hint {

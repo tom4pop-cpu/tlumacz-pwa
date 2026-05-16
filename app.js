@@ -228,6 +228,16 @@ function setupPanel(panel) {
     catch { setStatus(panel, "Nie udało się skopiować", "error"); }
   };
 
+  panelEl(panel, "paste-btn").onclick = async () => {
+    try {
+      const text = await navigator.clipboard.readText();
+      if (!text) { setStatus(panel, "Schowek pusty", "error"); return; }
+      panelEl(panel, "panel-text").value = text;
+      enableActions(panel);
+      setStatus(panel, "Wklejono", "success");
+    } catch { setStatus(panel, "Brak dostępu do schowka", "error"); }
+  };
+
   panelEl(panel, "panel-text").addEventListener("input", () => enableActions(panel));
 }
 
